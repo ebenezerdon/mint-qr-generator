@@ -7,7 +7,7 @@
     vendorReady: false,
     qrcode: null,
     settings: {
-      text: '',
+      text: 'https://example.com',
       size: 320,
       margin: 16,
       ecLevel: 'M',
@@ -139,7 +139,7 @@
       const v = $(this).val();
       validateAndUpdateSettings({ colorLight: v });
       // Update preview card immediately
-      document.getElementById('qrPreviewCard').style.setProperty('--qr-bg', v);
+      const _pc = document.getElementById('qrPreviewCard'); if (_pc) _pc.style.setProperty('--qr-bg', v);
       debouncedGenerate();
     });
 
