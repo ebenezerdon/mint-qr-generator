@@ -39,6 +39,25 @@
     if($c.length) return $c.get(0);
     return null;
   }
+  function saveCurrentToHistory(){
+    const canvas = getCanvas();
+    if(!canvas) { setStatus('Nothing to save yet'); return; }
+    const s = state.settings;
+    // Compose with margin/bg/logo then create a small thumbnail and persist
+    window.AppUtil.composeCanvas(canvas, { margin: s.margin, bg: s.colorLight, logo: s.logoDataURL, logoScale: 0.2 }).then(function(full){
+      const thumbSide = 160;
+      const thumb = document.createElement('canvas');
+      thumb.width = thumbSide; thumb.height = thumbSide;
+      const ctx = thumb.getContext('2d');
+      ctx.fillStyle = s.colorLight; ctx.fillRect(0,0,thumbSide,thumbSide);
+      ctx.drawImage(full, 0,0, thumbSide, thumbSide);
+      const data = thumb.toDataURL('image/png');
+      const item = { id: Date.now(), preview: data, settings: Object.assign({}, s), label: (s.text || '').slice(0, 60) };
+      const list = window.AppStorage.addHistory(item);
+      renderHistory(list);
+      setStatus('Saved'); setTimeout(function(){ setStatus(''); }, 800);
+    }).catch(function(){ setStatus('Save failed'); });
+  }
 
   function ensureVendor(){
     return !!window.QRCode;
@@ -48,6 +67,11 @@
     if(!ensureVendor()) return;
     const s = state.settings;
     const container = document.getElementById('qrContainer');
+    // If there's no preview container on this host page (e.g. landing/index), skip QR generation
+    if(!container){
+      // Nothing to render here — avoid calling vendor which will try to append to a null node
+      return;
+    }
     // Clear
     $(container).empty();
     try {
@@ -142,6 +166,12 @@
       const _pc = document.getElementById('qrPreviewCard'); if (_pc) _pc.style.setProperty('--qr-bg', v);
       debouncedGenerate();
     });
+    $('#btnGenerate').on('click', function(){
+      // Generate immediately
+      generateIfReady();
+      // Save generated result to history. Use a short timeout to ensure vendor generation completed and canvas exists.
+      setTimeout(function(){ saveCurrentToHistory(); }, 60);
+    });
 
     $('#logoInput').on('change', function(e){
       const file = e.target.files && e.target.files[0];
@@ -159,7 +189,7 @@
       $('#logoOverlay').hide();
       generateIfReady();
     });
-
+    // Duplicate '#btnGenerate' handler removed (previously bound generateIfReady twice)
     $('#btnGenerate').on('click', function(){ generateIfReady(); });
 
     $('#btnDownload').on('click', function(){
@@ -176,25 +206,6 @@
       window.AppUtil.copyCanvasToClipboard(canvas, { margin: s.margin, bg: s.colorLight, logo: s.logoDataURL, logoScale: 0.2 }).then(function(){ setStatus('Copied to clipboard'); setTimeout(function(){ setStatus(''); }, 1200); }).catch(function(){ setStatus('Clipboard not available'); });
     });
 
-    $('#btnSave').on('click', function(){
-      const canvas = getCanvas();
-      if(!canvas) { setStatus('Nothing to save yet'); return; }
-      const s = state.settings;
-      // Create a small thumbnail
-      window.AppUtil.composeCanvas(canvas, { margin: s.margin, bg: s.colorLight, logo: s.logoDataURL, logoScale: 0.2 }).then(function(full){
-        const thumbSide = 160;
-        const thumb = document.createElement('canvas');
-        thumb.width = thumbSide; thumb.height = thumbSide;
-        const ctx = thumb.getContext('2d');
-        ctx.fillStyle = s.colorLight; ctx.fillRect(0,0,thumbSide,thumbSide);
-        ctx.drawImage(full, 0,0, thumbSide, thumbSide);
-        const data = thumb.toDataURL('image/png');
-        const item = { id: Date.now(), preview: data, settings: Object.assign({}, s), label: (s.text || '').slice(0, 60) };
-        const list = window.AppStorage.addHistory(item);
-        renderHistory(list);
-        setStatus('Saved'); setTimeout(function(){ setStatus(''); }, 800);
-      });
-    });
 
     $('#clearHistory').on('click', function(){
       window.AppStorage.clearHistory();
