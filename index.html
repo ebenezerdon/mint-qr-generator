@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mint QR - Design-forward QR Code Generator</title>
+  <meta name="description" content="Mint QR helps you generate beautiful, branded QR codes in seconds with color controls, margins, and history. Built for speed and polish.">
+  <link rel="stylesheet" href="styles/tailwind.css" data-teda="tailwind-static" />
+    <link rel="stylesheet" href="styles/main.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  
+</head>
+<body class="min-h-screen bg-neutral-100 text-neutral-900">
+  <!-- Decorative background pattern -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute inset-0 opacity-10" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'160\' height=\'160\' viewBox=\'0 0 160 160\'><defs><pattern id=\'p\' width=\'40\' height=\'40\' patternUnits=\'userSpaceOnUse\'><circle cx=\'1\' cy=\'1\' r=\'1\' fill=\'%23ffffff\' opacity=\'0.5\'/><circle cx=\'21\' cy=\'21\' r=\'1\' fill=\'%23ffffff\' opacity=\'0.5\'/></pattern></defs><rect width=\'100%\' height=\'100%\' fill=\'%23f3f4f6\'/><rect width=\'100%\' height=\'100%\' fill=\'url(%23p)\'/></svg>'); background-size: 320px 320px;"></div>
+    <div class="absolute -top-40 -right-24 w-[520px] h-[520px] rounded-full bg-[#2ec4b6]/20 blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-24 w-[520px] h-[520px] rounded-full bg-[#f4b400]/20 blur-3xl"></div>
+  </div>
+
+  <header class="relative z-10">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <img src="assets/logo.svg" alt="Mint QR" class="h-9 w-9"/>
+        <span class="text-neutral-900 font-semibold tracking-tight text-lg">Mint QR</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#features" class="nav-link text-neutral-700">Features</a>
+        <a href="#how" class="nav-link text-neutral-700">How it works</a>
+        <a href="#faq" class="nav-link text-neutral-700">FAQ</a>
+        <a href="app.html" class="btn-secondary">Open app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+    <!-- Hero: Elevated card centered over rich background -->
+    <section class="py-10 sm:py-16 lg:py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mx-auto max-w-3xl card-elevated p-8 sm:p-12 relative">
+          <div class="absolute -top-4 -left-4 badge-accent">New • Designer-friendly</div>
+          <div class="space-y-6">
+            <h1 class="text-3xl sm:text-5xl leading-tight font-extrabold tracking-tight text-[#0f172a]">
+              Mint perfect QR codes in seconds
+            </h1>
+            <p class="text-neutral-600 text-base sm:text-lg max-w-2xl">
+              Create crisp, brand-ready QR codes with custom colors, margins, and logos. One-click downloads and a personal history keep your work flowing.
+            </p>
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <a href="app.html" class="btn-primary">Open the Generator</a>
+              <a href="#features" class="btn-secondary">Explore Features</a>
+            </div>
+            <div class="mt-6 grid grid-cols-12 gap-4">
+              <div class="col-span-8 sm:col-span-9 rounded-2xl bg-neutral-50 p-6 border border-neutral-200">
+                <div class="flex items-center gap-4">
+                  <div class="h-28 w-28 rounded-xl bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
+                    <div class="h-16 w-16 bg-[conic-gradient(at_40%_60%,_#111,_#2ec4b6_10%,_#111_70%)] rounded-md" style="mask: radial-gradient(circle at 60% 40%, black 62%, transparent 64%);"></div>
+                  </div>
+                  <div>
+                    <p class="text-sm text-neutral-500">Preview</p>
+                    <p class="font-semibold text-neutral-800">Crisp edges. Accessible contrast. Production ready.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-4 sm:col-span-3 rounded-2xl bg-white p-4 border border-neutral-200 flex flex-col justify-between">
+                <div>
+                  <p class="text-xs text-neutral-500 mb-2">Preset</p>
+                  <p class="font-semibold">Coral on Cream</p>
+                </div>
+                <div class="flex gap-2 mt-4">
+                  <span class="h-6 w-6 rounded-full bg-[#ff6b6b]"></span>
+                  <span class="h-6 w-6 rounded-full bg-[#faf5e6] border border-neutral-200"></span>
+                  <span class="h-6 w-6 rounded-full bg-[#0f172a]"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features in organic magazine-style layout -->
+        <section id="features" class="mt-16 sm:mt-24">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div class="rounded-3xl bg-white/90 backdrop-blur-xl p-8 border border-white/60 shadow-[0_20px_60px_-25px_rgba(15,23,42,0.35)]">
+              <h3 class="font-bold text-lg mb-2">Design-forward</h3>
+              <p class="text-neutral-600">Pick brand colors, set margins, and add a logo. Your codes look sharp on any surface.</p>
+            </div>
+            <div class="rounded-3xl bg-white/90 backdrop-blur-xl p-8 border border-white/60 shadow-[0_20px_60px_-25px_rgba(15,23,42,0.35)]">
+              <h3 class="font-bold text-lg mb-2">Instant export</h3>
+              <p class="text-neutral-600">One-click PNG downloads and copy to clipboard. Ready for decks and print.</p>
+            </div>
+            <div class="rounded-3xl bg-white/90 backdrop-blur-xl p-8 border border-white/60 shadow-[0_20px_60px_-25px_rgba(15,23,42,0.35)]">
+              <h3 class="font-bold text-lg mb-2">Private history</h3>
+              <p class="text-neutral-600">Recent designs are saved locally so you never lose a version.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="how" class="mt-20 sm:mt-28">
+          <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
+            <div class="rounded-2xl bg-white p-6 border border-neutral-200">
+              <div class="text-neutral-400 text-xs">Step 1</div>
+              <h4 class="font-semibold mt-1">Paste your link</h4>
+              <p class="text-neutral-600 text-sm mt-2">Or type any text. Works offline in your browser.</p>
+            </div>
+            <div class="rounded-2xl bg-white p-6 border border-neutral-200">
+              <div class="text-neutral-400 text-xs">Step 2</div>
+              <h4 class="font-semibold mt-1">Pick colors and size</h4>
+              <p class="text-neutral-600 text-sm mt-2">Tune contrast and margins for print-ready clarity.</p>
+            </div>
+            <div class="rounded-2xl bg-white p-6 border border-neutral-200">
+              <div class="text-neutral-400 text-xs">Step 3</div>
+              <h4 class="font-semibold mt-1">Save or download</h4>
+              <p class="text-neutral-600 text-sm mt-2">Download PNG or copy to clipboard in one tap.</p>
+            </div>
+          </div>
+          <div class="mt-10 flex justify-center">
+            <a href="app.html" class="btn-primary">Try it now</a>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="relative z-10 border-t border-white/10 mt-10">
+    <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-neutral-600 text-sm">Built with care. No tracking, no nonsense.</p>
+      <div class="flex items-center gap-4">
+        <a href="app.html" class="btn-secondary">Open Generator</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    $(function(){
+      const reveal = function(){
+        $('[data-reveal]').each(function(){
+          const rect = this.getBoundingClientRect();
+          if(rect.top < window.innerHeight - 80){
+            $(this).addClass('opacity-100 translate-y-0');
+          }
+        });
+      };
+      $('[data-reveal]').addClass('opacity-0 translate-y-6 transition-all duration-700');
+      $(window).on('scroll', reveal);
+      reveal();
+    });
+  </script>
+  <script src="scripts/helpers.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

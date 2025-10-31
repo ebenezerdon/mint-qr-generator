@@ -1,0 +1,27 @@
+/* Global styles for Mint QR - keep CSS simple and modern */
+:root {
+  --brand-coral: #ff6b6b;
+  --brand-yellow: #f4b400;
+  --brand-cyan: #2ec4b6;
+  --ink: #0f172a;
+}
+
+html:focus-within { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* Ensure QR preview canvas snaps crisply */
+#qrContainer canvas { image-rendering: pixelated; }
+
+/* History list thumbnails */
+#historyList .thumb { border-radius: 0.75rem; border: 1px solid #e5e7eb; background: #fff; padding: 0.5rem; display: flex; align-items: center; justify-content: center; }
+#historyList .thumb img { max-width: 100%; height: auto; display: block; }
+
+/* Prevent long URLs from breaking UI */
+.nowrap { white-space: nowrap; }
+
+/* Utility for hidden visually but accessible text */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
